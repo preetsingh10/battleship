@@ -2,17 +2,18 @@ class Ship {
   // health of the ship is same as of its length
   length = 0;
   sunk = false;
+  hitPoints = 0
   // the ship positin is an array of [head coordinates , .. middle coordinates, tail coordinates]
   position = [];
   attackedCoordinates = [];
   constructor(length) {
     this.length = length;
-    this.hitPoints = this.length;
+    this.hitPoints = length;
   }
 
   hit(coordinates) {
     this.attackedCoordinates.push(coordinates);
-    this.hitPoints--;
+    this.hitPoints - 1;
   }
 
   generateCordinates(start, length, direction) {
