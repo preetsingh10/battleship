@@ -1,8 +1,9 @@
+const arrayEqual = require("./utility/arrayEqual");
 class Ship {
   // health of the ship is same as of its length
   length = 0;
   sunk = false;
-  hitPoints = 0
+  hitPoints = 0;
   // the ship positin is an array of [head coordinates , .. middle coordinates, tail coordinates]
   position = [];
   attackedCoordinates = [];
@@ -12,8 +13,22 @@ class Ship {
   }
 
   hit(coordinates) {
-    this.attackedCoordinates.push(coordinates);
-    this.hitPoints - 1;
+    // expecting coordinates to be an array
+    if (!Array.isArray(coordinates)) {
+      return new Error("given coordinates were not in array");
+    }
+    let alreadyHit = false
+    this.attackedCoordinates.some(attackedCoordinate=>{
+      if(arrayEqual(attackedCoordinate, coordinates)){
+        alreadyHit = true
+      }
+    })
+    if(alreadyHit === false){
+      this.attackedCoordinates.push(coordinates)
+      this.hitPoints --
+    }
+    
+   
   }
 
   generateCordinates(start, length, direction) {
@@ -31,7 +46,7 @@ class Ship {
     return coordinates;
   }
   isSunk() {
-   return this.hitPoints === 0
+    return this.hitPoints === 0;
   }
 }
 

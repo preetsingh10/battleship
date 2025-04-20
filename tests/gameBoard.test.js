@@ -1,7 +1,7 @@
 const Gameboard = require("../Gameboard");
-let gameboard
+let gameboard;
 beforeEach(() => {
-   gameboard = new Gameboard();
+  gameboard = new Gameboard();
   gameboard.placeShip(gameboard.carrier, "horizontal", [1, 1]);
   gameboard.placeShip(gameboard.battleship, "vertical", [7, 7]);
 });
@@ -27,9 +27,8 @@ describe("keep track of the missed attacks", () => {
       [2, 7],
       [5, 5],
       [6, 6],
-      [10,10]
+      [10, 10],
     ]);
-    console.log("missed attacks: ", gameboard.missedAttacks);
   });
 });
 
@@ -41,21 +40,43 @@ describe("Ship placement", () => {
       [7, 9],
       [7, 10],
     ]);
-    console.log("battleship position: ",gameboard.battleship.position);
   });
 });
 
-// describe("to check if all ships are sunk", ()=>{
-//   expect(gameboard.allShipsSunk).toBe(true)
-// })
+describe("to check if all ships are sunk", () => {
+  test("should return true as we are attacking all of the ships", () => {
+    gameboard.placeShip(gameboard.cruiser, "horizontal", [1, 2]);
+    gameboard.placeShip(gameboard.destroyer, "vertical", [10, 7]);
+    gameboard.placeShip(gameboard.submarine, "horizontal", [1, 6]);
+
+    gameboard.receiveAttack(1, 6);
+    gameboard.receiveAttack(2, 6);
+    gameboard.receiveAttack(3, 6);
+    gameboard.receiveAttack(10, 7);
+    gameboard.receiveAttack(10, 8);
+    gameboard.receiveAttack(1, 2);
+    gameboard.receiveAttack(2, 2);
+    gameboard.receiveAttack(3, 2);
+    gameboard.receiveAttack(7, 7);
+    gameboard.receiveAttack(7, 8);
+    gameboard.receiveAttack(7, 9);
+    gameboard.receiveAttack(7, 10);
+    gameboard.receiveAttack(1, 1);
+    gameboard.receiveAttack(2, 1);
+    gameboard.receiveAttack(3, 1);
+    gameboard.receiveAttack(4, 1);
+    gameboard.receiveAttack(5, 1);
+
+    expect(gameboard.allShipsSunk()).toBe(true);
+  });
+});
 
 describe("to check if one ship is sunk or not", () => {
-  // gameboard.receiveAttack([7,7])
-  // gameboard.receiveAttack([7,8])
-  // gameboard.receiveAttack([7,9])
-  // gameboard.receiveAttack([7,10])
-  // expect(gameboard.battleship.isSunk()).toBe(true)
-  // expect(gameboard.battleship.position).toEqual([[7,7],[7,8],[7,9],[7,10]])
- 
-  
+  test("should return true as we are hitting all the coordinates of one ship", () => {
+    gameboard.receiveAttack(7, 7);
+    gameboard.receiveAttack(7, 8);
+    gameboard.receiveAttack(7, 9);
+    gameboard.receiveAttack(7, 10);
+    expect(gameboard.battleship.isSunk()).toBe(true);
+  });
 });
