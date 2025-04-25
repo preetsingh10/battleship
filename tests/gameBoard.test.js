@@ -18,12 +18,12 @@ describe("Gameboard - receiveAttack", () => {
 
 describe("keep track of the missed attacks", () => {
   test("recording missed attacks ", () => {
-    expect(gameboard.receiveAttack(2, 7));
-    expect(gameboard.receiveAttack(5, 5));
-    expect(gameboard.receiveAttack(6, 6));
-    expect(gameboard.receiveAttack(7, 8));
-    expect(gameboard.receiveAttack(10, 10));
-    expect(gameboard.missedAttacks).toEqual([
+    gameboard.receiveAttack(2, 7);
+    gameboard.receiveAttack(5, 5);
+   gameboard.receiveAttack(6, 6);
+   gameboard.receiveAttack(7, 8);
+   gameboard.receiveAttack(10, 10);
+   expect(gameboard.missedAttacks).toEqual([
       [2, 7],
       [5, 5],
       [6, 6],
@@ -41,6 +41,15 @@ describe("Ship placement", () => {
       [7, 10],
     ]);
   });
+  test("should throw an error as we are going to overalp the new ship coordinates with previously deployed", () => {
+    expect(() => {
+      gameboard.placeShip(gameboard.submarine, "horizontal", [7, 8]);
+    }).toThrow("overlaping co-ordinates");
+  });
+
+  test("should throw an error for goind out of bounds",()=>{
+  expect(()=>{  gameboard.placeShip(gameboard.submarine, 'vertical', [9,9])}).toThrow("out of bounds")
+  })
 });
 
 describe("to check if all ships are sunk", () => {

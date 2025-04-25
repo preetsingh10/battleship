@@ -7,28 +7,33 @@ class Ship {
   // the ship positin is an array of [head coordinates , .. middle coordinates, tail coordinates]
   position = [];
   attackedCoordinates = [];
-  constructor(length) {
+
+  constructor(length, name) {
     this.length = length;
     this.hitPoints = length;
+    this.name = name;
   }
-
+  isPlaced() {
+    if (this.position.length === 0) {
+      return false;
+    }
+    return true;
+  }
   hit(coordinates) {
     // expecting coordinates to be an array
     if (!Array.isArray(coordinates)) {
       return new Error("given coordinates were not in array");
     }
-    let alreadyHit = false
-    this.attackedCoordinates.some(attackedCoordinate=>{
-      if(arrayEqual(attackedCoordinate, coordinates)){
-        alreadyHit = true
+    let alreadyHit = false;
+    this.attackedCoordinates.some((attackedCoordinate) => {
+      if (arrayEqual(attackedCoordinate, coordinates)) {
+        alreadyHit = true;
       }
-    })
-    if(alreadyHit === false){
-      this.attackedCoordinates.push(coordinates)
-      this.hitPoints --
+    });
+    if (alreadyHit === false) {
+      this.attackedCoordinates.push(coordinates);
+      this.hitPoints--;
     }
-    
-   
   }
 
   generateCordinates(start, length, direction) {

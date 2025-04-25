@@ -1,14 +1,13 @@
-
 const Ship = require("./ship");
 const arrayEqual = require("./utility/arrayEqual");
 
 class Gameboard {
   // ships which every battleship game have
-  carrier = new Ship(5);
-  battleship = new Ship(4);
-  cruiser = new Ship(3);
-  submarine = new Ship(3);
-  destroyer = new Ship(2);
+  carrier = new Ship(5, 'Carrier');
+  battleship = new Ship(4, 'BattleShip');
+  cruiser = new Ship(3, 'Cruiser');
+  submarine = new Ship(3, 'Submarine');
+  destroyer = new Ship(2, 'Destroyer');
 
   allShips = [
     this.carrier,
@@ -19,10 +18,31 @@ class Gameboard {
   ];
 
   missedAttacks = [];
-
+  
+  // helper function
+  isOverlap(newCoordinates) {
+    return this.allShips.some((ship) => {
+      return ship.position.some((coord) => {
+        return newCoordinates.some((newCoord) => {
+          return arrayEqual(newCoord, coord);
+        });
+      });
+    });
+  }
   placeShip(ship, direction, start) {
-    // start and end are coordinates like [x1,y1] and [x2,y2]
-    ship.position = ship.generateCordinates(start, ship.length, direction);
+    const BOARD_SIZE = 10;
+    let newCoord = ship.generateCordinates(start, ship.length, direction);
+    const outOfBounds = newCoord.some(([x, y]) => {
+      return x < 0 || y < 0 || x > BOARD_SIZE || y > BOARD_SIZE;
+    });
+    if (outOfBounds) {
+      throw new Error("out of bounds");
+    }
+    if (this.isOverlap(newCoord) === false) {
+      ship.position = newCoord;
+    } else {
+      throw new Error("overlaping co-ordinates");
+    }
   }
   receiveAttack(x, y) {
     if (typeof x !== "number" && typeof y !== "number") {
@@ -44,7 +64,7 @@ class Gameboard {
     return isHit;
   }
   allShipsSunk() {
-    return this.allShips.every(ship=>ship.isSunk())
+    return this.allShips.every((ship) => ship.isSunk());
   }
 }
 
