@@ -43,6 +43,7 @@ class Gameboard {
     } else {
       throw new Error("overlaping co-ordinates");
     }
+    return newCoord
   }
   receiveAttack(x, y) {
     if (typeof x !== "number" && typeof y !== "number") {

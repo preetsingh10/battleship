@@ -9,6 +9,7 @@ class Player {
   allShips = this.playerBoard.allShips;
 
   placeShip(shipName, direction, coordinates) {
+    
     this.allShips.some((ship) => {
       if (ship.name === shipName && ship.isPlaced() === false) {
         return this.playerBoard.placeShip(ship, direction, coordinates);
