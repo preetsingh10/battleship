@@ -4,25 +4,31 @@
 }
 .game-body{
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-template-rows: 0.5fr 2fr;
+    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-rows: 0.1fr 2fr;
     gap: 20px;
-    justify-content: center;
+
+}
+.board-titles{
+    margin-left: 150px;
+    margin-right: 150px;
+    grid-column: span 3;
+    display: flex;
+    justify-content: space-between;
 }
 .user-board{
    
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+
 
 }
 .user-grid{
     justify-self: end;
 }
 
-.user-title{
+/* .user-title{
     justify-self: end;
     margin-right: 20%;
-}
+} */
 .user-grid,.openant-grid{
     border: 1px solid black;
     min-width: 10% ;
@@ -46,7 +52,7 @@
 .user-ships{
     display: grid;
     grid-template-columns: 1fr 2fr;
-    justify-self: start;
+    justify-self: end;
     gap: 10px;
     height: fit-content;
 }
@@ -68,4 +74,38 @@
 }
 .ship-placed:hover{
     background-color: blue;
+}
+.ship-button, .start-button {
+    padding: 10px 20px;
+    background-color: #3498db; /* nice blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.ship-button:hover, .start-button:hover {
+    background-color: #2980b9; /* darker blue on hover */
+}
+.start-button{
+    display: none;
+
+}
+.Carrier{
+    background-color: red;
+}
+.BattleShip{
+    background-color: blue;
+}
+.Submarine{
+    background-color: black;
+}
+.Destroyer{
+    background-color: purple;
+}
+.Cruiser{
+    background-color: brown;
 }

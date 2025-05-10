@@ -7,6 +7,8 @@ class Ship {
   // the ship positin is an array of [head coordinates , .. middle coordinates, tail coordinates]
   position = [];
   attackedCoordinates = [];
+  direction;
+  placed = false;
 
   constructor(length, name) {
     this.length = length;
@@ -15,9 +17,10 @@ class Ship {
   }
   isPlaced() {
     if (this.position.length === 0) {
-      return false;
+       return this.placed;
     }
-    return true;
+    this.placed = true
+    return this.placed;
   }
   hit(coordinates) {
     // expecting coordinates to be an array

@@ -9,7 +9,6 @@ class Player {
   allShips = this.playerBoard.allShips;
 
   placeShip(shipName, direction, coordinates) {
-    
     this.allShips.some((ship) => {
       if (ship.name === shipName && ship.isPlaced() === false) {
         return this.playerBoard.placeShip(ship, direction, coordinates);
@@ -23,5 +22,37 @@ class Player {
   receiveAttack([x, y]) {
     return this.playerBoard.receiveAttack(x, y);
   }
+  allShipSunk() {
+    return this.playerBoard.allShipsSunk();
+  }
+  genrateRandomShipPostion() {
+
+    const direction = ["horizontal", "vertical"];
+
+    this.allShips.forEach((ship) => {
+      if(ship.placed === false){
+        let placed = false;
+
+        while (placed === false) {
+          try {
+            let randomCordinate = [
+              Math.floor(Math.random() * 10) + 1,
+              Math.floor(Math.random() * 10) + 1  ,
+            ];
+            let randomDirection =
+              direction[Math.floor(Math.random() * direction.length)];
+            this.playerBoard.placeShip(ship, randomDirection, randomCordinate);
+            placed = true;
+            
+          } catch (error) {
+    
+          }
+        }
+      }
+
+  
+    });
+  }
 }
-module.exports = Player
+
+module.exports = Player;

@@ -29,6 +29,7 @@ class Gameboard {
       });
     });
   }
+
   placeShip(ship, direction, start) {
     const BOARD_SIZE = 10;
     let newCoord = ship.generateCordinates(start, ship.length, direction);
@@ -40,6 +41,8 @@ class Gameboard {
     }
     if (this.isOverlap(newCoord) === false) {
       ship.position = newCoord;
+      ship.direction = direction
+      ship.placed = true
     } else {
       throw new Error("overlaping co-ordinates");
     }
