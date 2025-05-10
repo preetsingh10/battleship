@@ -43,9 +43,9 @@ function displayUserBoard(playerObject) {
   });
 
   // event fired upon clicking on the grid cells
-  let cell = document.querySelectorAll(".cell");
+  let userCells = document.querySelectorAll(".user-cells");
   let shipObject;
-  cell.forEach((cellUnit) => {
+  userCells.forEach((cellUnit) => {
     cellUnit.addEventListener("click", () => {
       playerObject.allShips.some((ship) => {
         if (ship.name === selectedShip) {
@@ -53,11 +53,11 @@ function displayUserBoard(playerObject) {
         }
       });
       try {
-        playerObject.placeShip(shipObject, "horizontal", [
+        playerObject.placeShip(shipObject.name, "horizontal", [
           +cellUnit.dataset.x,
           +cellUnit.dataset.y,
         ]);
-       displayShipsOnBoard(cell,shipObject)
+       displayShipsOnBoard(userCells,shipObject)
         updateShipButton(allShipsButtons, playerObject.allShips);
       } catch (error) {
         alert(error.message);
@@ -69,6 +69,7 @@ function displayUserBoard(playerObject) {
         gameBody.removeChild(userShips);
         startButton.style.display = "block";
       }
+      console.log(`${shipObject.name}: ${shipObject.position}`)
     });
   });
 }
@@ -101,7 +102,7 @@ function placeShipsRandomly(containerDiv, playerObject) {
     while (placed === false) {
       try {
         playerObject.genrateRandomShipPostion();
-        console.log(`${ship.name}: `, ship.position);
+       
         displayShipsOnBoard(openantCells, ship);
         placed = true;
       } catch (error) {}

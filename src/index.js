@@ -10,11 +10,10 @@ let gameStart = false;
 
 
 displayUserBoard(user);
-displayOpenantBoard(computerPlayer)
 // start button element
 const startButton = document.querySelector('.start-button')
 startButton.addEventListener('click', ()=>{
-  displayGrid('openant-board', 'openant-grid','openant-cells')
+
   startButton.style.display = 'none'
   displayOpenantBoard(computerPlayer)
 })
