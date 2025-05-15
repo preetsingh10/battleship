@@ -1,111 +1,114 @@
-.title{
-   
-    text-align: center;
+.title {
+  text-align: center;
 }
-.game-body{
-    display: grid;
-    grid-template-columns: 1fr 0.5fr 1fr;
-    grid-template-rows: 0.1fr 2fr;
-    gap: 20px;
-
+.game-body {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr;
+  grid-template-rows: 0.1fr 2fr;
+  gap: 20px;
 }
-.board-titles{
-    margin-left: 150px;
-    margin-right: 150px;
-    grid-column: span 3;
-    display: flex;
-    justify-content: space-between;
+.board-titles {
+  margin-left: 150px;
+  margin-right: 150px;
+  grid-column: span 3;
+  display: flex;
+  justify-content: space-between;
 }
-.user-board{
-   
-
-
+.user-board {
 }
-.user-grid{
-    justify-self: end;
+.user-grid {
+  justify-self: end;
 }
 
 /* .user-title{
     justify-self: end;
     margin-right: 20%;
 } */
-.user-grid,.openant-grid{
-    border: 1px solid black;
-    min-width: 10% ;
-    max-width: 20%;
-    max-width: fit-content;
-    display: grid;
-    grid-template-columns: repeat(10,1fr);
-    grid-template-rows: repeat(10,1fr);
+.user-grid,
+.openant-grid {
+  border: 1px solid black;
+  min-width: 10%;
+  max-width: 20%;
+  max-width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
 }
-.cell, .ship-body-unit{
-    border: 1px solid black; 
-    width: 50px;
-    height: 50px;
+.cell,
+.ship-body-unit {
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
 
-    cursor: pointer;
-   
-}
-.cell:hover{
-    background-color: rgba(0, 0, 0, 0.105);
-}
-.user-ships{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    justify-self: end;
-    gap: 10px;
-    height: fit-content;
-}
-.ship-body{
-    border: 1px solid black;
-    display: flex;
-   width: fit-content;
-}
-.ship-body-unit{
-    background-color: rgba(0, 0, 0, 0.402);
-    
+  cursor: pointer;
 }
 
-.dragOver{
-    background-color: black;
+.user-ships {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-self: end;
+  gap: 10px;
+  height: fit-content;
 }
-.ship-placed{
-    background-color: blue;
+.ship-body {
+  border: 1px solid black;
+  display: flex;
+  width: fit-content;
 }
-.ship-placed:hover{
-    background-color: blue;
-}
-.ship-button, .start-button {
-    padding: 10px 20px;
-    background-color: #3498db; /* nice blue */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+.ship-body-unit {
+  background-color: rgba(0, 0, 0, 0.402);
 }
 
-.ship-button:hover, .start-button:hover {
-    background-color: #2980b9; /* darker blue on hover */
+.dragOver {
+  background-color: black;
 }
-.start-button{
-    display: none;
+.ship-placed {
+  background-color: blue;
+}
+.ship-placed:hover {
+  background-color: blue;
+}
+.ship-button,
+.start-button {
+  padding: 10px 20px;
+  background-color: #3498db; /* nice blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
 
+.ship-button:hover,
+.start-button:hover {
+  background-color: #3e82b0; /* darker blue on hover */
 }
-.Carrier{
-    background-color: red;
+.start-button {
+  display: none;
 }
-.BattleShip{
-    background-color: blue;
+.Carrier {
+  background-color: green;
 }
-.Submarine{
-    background-color: black;
+.BattleShip {
+  background-color: rgb(220, 20, 143);
 }
-.Destroyer{
-    background-color: purple;
+.Submarine {
+  background-color: black;
 }
-.Cruiser{
-    background-color: brown;
+.Destroyer {
+  background-color: purple;
 }
+.Cruiser {
+  background-color: brown;
+}
+.missedAttack {
+  background-color: blue;
+}
+.attacked {
+  background-color: red;
+}
+.cell:hover {
+    border-color: aquamarine;
+  }

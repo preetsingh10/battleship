@@ -5,6 +5,7 @@ const {
   updateShipButton,
   allShipsPlaced,
 } = require("../utility/uiState/updateShipButton");
+const arrayEqual = require("../utility/arrayEqual");
 // game body div
 const gameBody = document.querySelector(".game-body");
 // start Button
@@ -45,33 +46,36 @@ function displayUserBoard(playerObject) {
   // event fired upon clicking on the grid cells
   let userCells = document.querySelectorAll(".user-cells");
   let shipObject;
-  userCells.forEach((cellUnit) => {
-    cellUnit.addEventListener("click", () => {
-      playerObject.allShips.some((ship) => {
-        if (ship.name === selectedShip) {
-          shipObject = ship;
-        }
-      });
-      try {
-        playerObject.placeShip(shipObject.name, "horizontal", [
-          +cellUnit.dataset.x,
-          +cellUnit.dataset.y,
-        ]);
-       displayShipsOnBoard(userCells,shipObject)
-        updateShipButton(allShipsButtons, playerObject.allShips);
-      } catch (error) {
-        alert(error.message);
+  function userBoardClickEent(event) {
+    const cellUnit = event.currentTarget
+    playerObject.allShips.some((ship) => {
+      if (ship.name === selectedShip) {
+        shipObject = ship;
       }
-      if (allShipsPlaced(allShipsButtons)) {
-        startButton.addEventListener("click", () => {
-          gameStart = true;
-        });
-        gameBody.removeChild(userShips);
-        startButton.style.display = "block";
-      }
-      console.log(`${shipObject.name}: ${shipObject.position}`)
     });
+    try {
+      playerObject.placeShip(shipObject.name, "horizontal", [
+        +cellUnit.dataset.x,
+        +cellUnit.dataset.y,
+      ]);
+      displayShipsOnBoard(userCells, shipObject);
+      updateShipButton(allShipsButtons, playerObject.allShips);
+    } catch (error) {
+      alert(error.message);
+    }
+    if (allShipsPlaced(allShipsButtons)) {
+      startButton.addEventListener("click", () => {
+        gameStart = true;
+      });
+      gameBody.removeChild(userShips);
+      startButton.style.display = "block";
+    }
+    console.log(`${shipObject.name}: ${shipObject.position}`);
+  }
+  userCells.forEach((cellUnit) => {
+    cellUnit.addEventListener("click", userBoardClickEent);
   });
+  return userBoardClickEent;
 }
 function displayOpenantBoard(playerObject) {
   displayGrid("openant-board", "openant-grid", "openant-cells"); // this function will make a grid inside openant-board
@@ -102,11 +106,30 @@ function placeShipsRandomly(containerDiv, playerObject) {
     while (placed === false) {
       try {
         playerObject.genrateRandomShipPostion();
-       
+
         displayShipsOnBoard(openantCells, ship);
         placed = true;
       } catch (error) {}
     }
   });
 }
-module.exports = { displayUserBoard, displayGrid, displayOpenantBoard };
+function displayAttackedCoordinates(nodeListOfCells, playerObject) {
+  playerObject.allShips.forEach((ship) => {
+    nodeListOfCells.forEach((cell) => {
+      ship.attackedCoordinates.forEach((coOrdinate) => {
+        if (arrayEqual([+cell.dataset.x, +cell.dataset.y], coOrdinate)) {
+          cell.dataset.attacked = "true";
+          cell.classList.add("attacked");
+        }
+      });
+    });
+  });
+}
+
+module.exports = {
+  displayUserBoard,
+  displayGrid,
+  displayOpenantBoard,
+  displayAttackedCoordinates,
+  // userBoardClickEvent
+};
