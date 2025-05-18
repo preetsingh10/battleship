@@ -41,7 +41,7 @@ class Player {
             ];
             let randomDirection =
               direction[Math.floor(Math.random() * direction.length)];
-            this.playerBoard.placeShip(ship, randomDirection, randomCordinate);
+            this.placeShip(ship.name, randomDirection, randomCordinate);
             placed = true;
             
           } catch (error) {
@@ -49,9 +49,8 @@ class Player {
           }
         }
       }
-
-  
     });
+
   }
 }
 

@@ -2,6 +2,12 @@ const arrayEqual = require("./utility/arrayEqual");
 class Ship {
   // health of the ship is same as of its length
   length = 0;
+
+  constructor(length, name) {
+    this.length = length;
+    this.hitPoints = length;
+    this.name = name;
+  }
   sunk = false;
   hitPoints = 0;
   // the ship positin is an array of [head coordinates , .. middle coordinates, tail coordinates]
@@ -10,11 +16,6 @@ class Ship {
   direction;
   placed = false;
 
-  constructor(length, name) {
-    this.length = length;
-    this.hitPoints = length;
-    this.name = name;
-  }
   isPlaced() {
     if (this.position.length === 0) {
        return this.placed;
