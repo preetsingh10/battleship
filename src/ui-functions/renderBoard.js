@@ -1,9 +1,9 @@
-import arrayEqual from "../utility/arrayEqual";
+import arrayEqual from "../../utility/arrayEqual";
 
-export function renderBoard(playerObject, parentDiv) {
-  // required parentDiv is the DOM element not just the name
-
+export function renderBoard(playerObject, parentDivName) {
   const allShips = playerObject.allShips;
+  const parentDiv = document.querySelector(`.${parentDivName}`);
+  parentDiv.innerHTML = " ";
 
   // double for loops make the cells of the board
   for (let i = 1; i <= 10; i++) {
@@ -18,7 +18,7 @@ export function renderBoard(playerObject, parentDiv) {
       allShips.forEach((ship) => {
         ship.position.forEach((coordinate) => {
           if (arrayEqual([j, i], coordinate)) {
-            cell.classList.add(`${ship.name}`)
+            cell.classList.add(`${ship.name}`);
           }
         });
       });
