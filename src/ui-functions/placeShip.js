@@ -1,4 +1,6 @@
 import { renderBoard } from "./renderBoard";
+import { readyMessageAndButton } from "./readyMessageAndButton";
+import { renderDisplayBoard } from "./renderDisplayBoard";
 export function placeShip(userObject) {
   const userShipButtons = document.querySelectorAll(".ship-button");
   let selectedShip;
@@ -21,6 +23,9 @@ export function placeShip(userObject) {
 
     renderBoard(userObject, "user-board");
     selectedShip = null;
+    if (userObject.allShipsPlaced()) {
+      renderDisplayBoard(readyMessageAndButton());
+    }
   }
   const userBoard = document.querySelector(".user-board");
   userBoard.addEventListener("click", (e) => {

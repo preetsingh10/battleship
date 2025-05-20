@@ -22,35 +22,33 @@ class Player {
   receiveAttack([x, y]) {
     return this.playerBoard.receiveAttack(x, y);
   }
+  allShipsPlaced() {
+    return this.allShips.every(ship=> ship.placed == true);
+  }
   allShipSunk() {
     return this.playerBoard.allShipsSunk();
   }
   genrateRandomShipPostion() {
-
     const direction = ["horizontal", "vertical"];
 
     this.allShips.forEach((ship) => {
-      if(ship.placed === false){
+      if (ship.placed === false) {
         let placed = false;
 
         while (placed === false) {
           try {
             let randomCordinate = [
               Math.floor(Math.random() * 10) + 1,
-              Math.floor(Math.random() * 10) + 1  ,
+              Math.floor(Math.random() * 10) + 1,
             ];
             let randomDirection =
               direction[Math.floor(Math.random() * direction.length)];
             this.placeShip(ship.name, randomDirection, randomCordinate);
             placed = true;
-            
-          } catch (error) {
-    
-          }
+          } catch (error) {}
         }
       }
     });
-
   }
 }
 
