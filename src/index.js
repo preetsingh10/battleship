@@ -6,15 +6,18 @@ import { placeShip } from "./ui-functions/placeShip";
 import { readyMessageAndButton } from "./ui-functions/readyMessageAndButton";
 const Player = require("../Player");
 
-const user = new Player();
-const computerPlayer = new Player();
+export const user = new Player();
+export const computerPlayer = new Player();
 let gameStart = false;
 computerPlayer.genrateRandomShipPostion();
 
 // belown functions will render the gameplay
 renderBoard(user, "user-board");
 renderDisplayBoard(userShipsAndButtons(user));
-renderBoard(computerPlayer, "openant-board");
 
 // now its the ship placing stage where user will place the ships on the board
 placeShip(user);
+
+// after pressing ready game begins here
+
+// startGame();

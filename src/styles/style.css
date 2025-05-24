@@ -1,103 +1,21 @@
-/* .title {
-  text-align: center;
-}
-.game-body {
-  display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr;
-  grid-template-rows: 0.1fr 2fr;
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #0f172a,
+    #1e293b
+  ); /* dark blue gradient */
+  font-family: "Orbitron", sans-serif; /* clean, futuristic font */
+  color: #f1f5f9; /* light text for contrast */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   gap: 20px;
+  padding-top: 30px;
 }
-.board-titles {
-  margin-left: 150px;
-  margin-right: 150px;
-  grid-column: span 3;
-  display: flex;
-  justify-content: space-between;
-}
-.user-board {
-}
-.user-grid {
-  justify-self: end;
-} 
-
-/* .user-title{
-    justify-self: end;
-    margin-right: 20%;
-}
-.user-grid,
-.openant-grid {
-  border: 1px solid black;
-  min-width: 10%;
-  max-width: 20%;
-  max-width: fit-content;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-}
-.cell,
-.ship-body-unit {
-  border: 1px solid black;
-  width: 50px;
-  height: 50px;
-
-  cursor: pointer;
-}
-
-.user-ships {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  justify-self: end;
-  gap: 10px;
-  height: fit-content;
-}
-.ship-body {
-  border: 1px solid black;
-  display: flex;
-  width: fit-content;
-}
-.ship-body-unit {
-  background-color: rgba(0, 0, 0, 0.402);
-}
-
-.dragOver {
-  background-color: black;
-}
-.ship-placed {
-  background-color: blue;
-}
-.ship-placed:hover {
-  background-color: blue;
-}
-.ship-button,
-.start-button {
-  padding: 10px 20px;
-  background-color: #3498db; 
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-align: center;
-}
-
-.ship-button:hover,
-.start-button:hover {
-  background-color: #3e82b0; 
-}
-.start-button {
-  display: none;
-}
-
-.missedAttack {
-  background-color: blue;
-}
-.attacked {
-  background-color: red;
-}
-.cell:hover {
-  background-color: rgba(255, 255, 255, 0.351);
-} */
 .title {
   text-align: center;
 }
@@ -127,21 +45,32 @@
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 }
+/* ---------- multi Purpose Board ------ */
 .multi-purpose-board {
-  max-width: fit-content;
+  min-width: 250px;
+  max-width: 400px;
   border: 1px solid blue;
   margin: 1%;
 }
 
-.cell {
+/* .cell {
   height: 50px;
   width: 50px;
   background-color: aqua;
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
+} */
+.cell {
+  width: 50px;
+  height: 50px;
+  background-color: #1e293b; /* dark navy blue */
+  border: 1px solid #334155; /* slightly lighter border for contrast */
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
   cursor: pointer;
 }
 .cell:hover {
-  scale: 1.1;
+  background-color: #334155;
 }
 .Carrier {
   background-color: green;
@@ -171,7 +100,8 @@
   gap: 5px 10px;
 }
 
-.ship-button {
+.ship-button,
+.readyButton {
   background-color: #1f2937; /* Dark navy background */
   color: #f9fafb; /* Light text */
   border: 2px solid #4ade80; /* Green glow border */
@@ -194,15 +124,17 @@
   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade80;
   transform: scale(1.05);
 }
-.headingTextForShipButtons {
+.headingTextForShipButtons,
+.readyHeading,
+.shipsLeftHeading {
   grid-column: span 2;
   background-color: #0f172a; /* Deep navy */
   color: #38bdf8; /* Bright blue for command tone */
   border: 2px solid #38bdf8;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   font-size: 1.5rem;
-  font-family: "Orbitron", sans-serif;
+
   border-radius: 10px;
   box-shadow: 0 0 10px #38bdf8;
   margin-bottom: 10px;
@@ -212,4 +144,21 @@
 }
 .ship_placed_button {
   background-color: greenyellow;
+  color: #1e293b;
+}
+.readyButton {
+  display: flex;
+  justify-self: center;
+  margin-top: 10%;
+}
+.readyButton:hover {
+  background-color: greenyellow;
+}
+/* ----------------------------- Game Status Div -------------------------------------- */
+.gameStatusContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.shipsLeftHeading {
+  grid-column: span 2;
 }

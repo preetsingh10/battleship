@@ -1,13 +1,21 @@
-export function readyMessageAndButton(){
-    const outerDiv = document.createElement('div')
-    const readyHeading = document.createElement('div')
-    readyHeading.textContent = "Are you ready for battle ?"
-    readyHeading.classList.add("readyHeading")
-    const readyButton = document.createElement('button')
-    readyButton.classList.add('readyButton')
-    readyButton.textContent = 'Ready'
+import { renderBoard } from "./renderBoard";
+import { renderDisplayBoard } from "./renderDisplayBoard";
+import { computerPlayer } from "..";
+import { gamaeStatus } from "./gameStatus";
+export function readyMessageAndButton() {
+  const outerDiv = document.createElement("div");
 
-    outerDiv.appendChild(readyHeading)
-    outerDiv.appendChild(readyButton)
-    return outerDiv
+  const readyHeading = document.createElement("div");
+  readyHeading.textContent = "Are you ready for battle ?";
+  readyHeading.classList.add("readyHeading");
+  const readyButton = document.createElement("button");
+  readyButton.classList.add("readyButton");
+  readyButton.addEventListener("click", () => {
+    renderBoard(computerPlayer, "openant-board");
+    renderDisplayBoard(gamaeStatus());
+  });
+  readyButton.textContent = "Ready";
+  outerDiv.appendChild(readyHeading);
+  outerDiv.appendChild(readyButton);
+  return outerDiv;
 }

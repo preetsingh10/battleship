@@ -15,6 +15,13 @@ class Player {
       }
     });
   }
+  shipsLeft(){
+    return this.allShips.filter(ship=>{
+      if(ship.hitPoints !== 0){
+        return true
+      }
+    }).length
+  }
 
   attack(enemyBoard, [x, y]) {
     return enemyBoard.receiveAttack(x, y);
