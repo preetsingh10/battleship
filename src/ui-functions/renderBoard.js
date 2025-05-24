@@ -9,19 +9,35 @@ export function renderBoard(playerObject, parentDivName) {
   for (let i = 1; i <= 10; i++) {
     for (let j = 1; j <= 10; j++) {
       const cell = document.createElement("div");
-      cell.id = `x:${j}, y:${i}`;
+      cell.id = `${parentDivName}: x:${j}, y:${i}`;
       cell.dataset.x = j;
       cell.dataset.y = i;
       cell.classList.add("cell");
       parentDiv.appendChild(cell);
-      // below code will display the ships based upon playerObject
-      allShips.forEach((ship) => {
-        ship.position.forEach((coordinate) => {
-          if (arrayEqual([j, i], coordinate)) {
-            cell.classList.add(`${ship.name}`);
-          }
-        });
+    }
+  }
+  // below code will display the ships based upon playerObject
+  allShips.forEach((ship) => {
+    ship.position.forEach(([x, y]) => {
+      const cell = document.getElementById(`${parentDivName}: x:${x}, y:${y}`);
+      cell.classList.add(`${ship.name}`);
+    });
+    // below code will mark the attacked coordinates
+    if (ship.attackedCoordinates !== 0) {
+      ship.attackedCoordinates.forEach(([x, y]) => {
+        const cell = document.getElementById(
+          `${parentDivName}: x:${x}, y:${y}`
+        );
+        cell.classList.add("ship-attacked");
       });
     }
+  });
+
+  // below code will mark the missed attacks
+  if (playerObject.playerBoard.missedAttacks !== 0) {
+    playerObject.playerBoard.missedAttacks.forEach(([x, y]) => {
+      const cell = document.getElementById(`${parentDivName}: x:${x}, y:${y}`);
+      cell.classList.add("missed-attack");
+    });
   }
 }

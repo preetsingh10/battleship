@@ -4,6 +4,7 @@ import { renderDisplayBoard } from "./ui-functions/renderDisplayBoard";
 import { userShipsAndButtons } from "./ui-functions/userShipsAndButton";
 import { placeShip } from "./ui-functions/placeShip";
 import { readyMessageAndButton } from "./ui-functions/readyMessageAndButton";
+import { enableAttacking } from "./ui-functions/enableAttacking";
 const Player = require("../Player");
 
 export const user = new Player();
@@ -18,6 +19,5 @@ renderDisplayBoard(userShipsAndButtons(user));
 // now its the ship placing stage where user will place the ships on the board
 placeShip(user);
 
-// after pressing ready game begins here
 
 // startGame();

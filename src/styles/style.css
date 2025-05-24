@@ -162,3 +162,10 @@ body {
 .shipsLeftHeading {
   grid-column: span 2;
 }
+/* attacks display */
+.ship-attacked{
+  background-color: red;
+}
+.missed-attack{
+  background-color: #22c55e;
+}

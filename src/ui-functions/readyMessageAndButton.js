@@ -2,6 +2,7 @@ import { renderBoard } from "./renderBoard";
 import { renderDisplayBoard } from "./renderDisplayBoard";
 import { computerPlayer } from "..";
 import { gamaeStatus } from "./gameStatus";
+import { enableAttacking } from "./enableAttacking";
 export function readyMessageAndButton() {
   const outerDiv = document.createElement("div");
 
@@ -13,6 +14,7 @@ export function readyMessageAndButton() {
   readyButton.addEventListener("click", () => {
     renderBoard(computerPlayer, "openant-board");
     renderDisplayBoard(gamaeStatus());
+    enableAttacking()
   });
   readyButton.textContent = "Ready";
   outerDiv.appendChild(readyHeading);
