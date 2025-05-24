@@ -5,7 +5,7 @@ export function gamaeStatus() {
   outerDiv.classList.add("gameStatusContainer");
   const shipsLeftHeading = document.createElement("div");
   shipsLeftHeading.textContent = "Ships left: ";
-  shipsLeftHeading.classList.add('shipsLeftHeading')
+  shipsLeftHeading.classList.add("shipsLeftHeading");
   const userShipsLabel = document.createElement("div");
   userShipsLabel.textContent = "User Ships: ";
   let userShipsLeft = document.createElement("div");
@@ -14,7 +14,25 @@ export function gamaeStatus() {
   openantLabel.textContent = "Enemy Ships: ";
   let openantShipsLeft = document.createElement("div");
   openantShipsLeft.textContent = computerPlayer.shipsLeft();
+  const winnerMessage = document.createElement("div");
+  winnerMessage.classList.add("winner-message");
 
-outerDiv.append(shipsLeftHeading,userShipsLabel,userShipsLeft,openantLabel, openantShipsLeft)
-return outerDiv
+  outerDiv.append(
+    shipsLeftHeading,
+    userShipsLabel,
+    userShipsLeft,
+    openantLabel,
+    openantShipsLeft
+  );
+  if (user.allShipSunk()) {
+    outerDiv.innerHTML = " ";
+    winnerMessage.textContent = "💀 You Loose Commander 💀";
+    outerDiv.append(winnerMessage);
+  }
+  if (computerPlayer.allShipSunk()) {
+    outerDiv.innerHTML = " ";
+    winnerMessage.textContent = "🎉 You Win Commander 🎉";
+    outerDiv.append(winnerMessage);
+  }
+  return outerDiv;
 }

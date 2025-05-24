@@ -126,7 +126,7 @@ body {
 }
 .headingTextForShipButtons,
 .readyHeading,
-.shipsLeftHeading {
+.shipsLeftHeading,.winner-message {
   grid-column: span 2;
   background-color: #0f172a; /* Deep navy */
   color: #38bdf8; /* Bright blue for command tone */
