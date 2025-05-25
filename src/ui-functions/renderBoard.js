@@ -1,7 +1,6 @@
 import arrayEqual from "../../utility/arrayEqual";
 
 export function renderBoard(playerObject, parentDivName) {
-  const allShips = playerObject.allShips;
   const parentDiv = document.querySelector(`.${parentDivName}`);
   parentDiv.innerHTML = " ";
 
@@ -16,6 +15,9 @@ export function renderBoard(playerObject, parentDivName) {
       parentDiv.appendChild(cell);
     }
   }
+}
+export function updateBoard(playerObject, parentDivName) {
+  const allShips = playerObject.allShips;
   // below code will display the ships based upon playerObject
   allShips.forEach((ship) => {
     ship.position.forEach(([x, y]) => {

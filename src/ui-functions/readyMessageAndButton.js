@@ -1,4 +1,4 @@
-import { renderBoard } from "./renderBoard";
+import { renderBoard, updateBoard } from "./renderBoard";
 import { renderDisplayBoard } from "./renderDisplayBoard";
 import { computerPlayer } from "..";
 import { gamaeStatus } from "./gameStatus";
@@ -13,6 +13,7 @@ export function readyMessageAndButton() {
   readyButton.classList.add("readyButton");
   readyButton.addEventListener("click", () => {
     renderBoard(computerPlayer, "openant-board");
+    updateBoard(computerPlayer,'openant-board')
     renderDisplayBoard(gamaeStatus());
     enableAttacking()
   });

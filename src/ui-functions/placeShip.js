@@ -1,4 +1,4 @@
-import { renderBoard } from "./renderBoard";
+import { renderBoard, updateBoard } from "./renderBoard";
 import { readyMessageAndButton } from "./readyMessageAndButton";
 import { renderDisplayBoard } from "./renderDisplayBoard";
 export function placeShip(userObject) {
@@ -21,7 +21,7 @@ export function placeShip(userObject) {
       alert(error.message);
     }
 
-    renderBoard(userObject, "user-board");
+    updateBoard(userObject,'user-board')
     selectedShip = null;
     if (userObject.allShipsPlaced()) {
       renderDisplayBoard(readyMessageAndButton());
