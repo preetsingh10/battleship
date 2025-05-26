@@ -1,6 +1,4 @@
-import arrayEqual from "../../utility/arrayEqual";
-
-export function renderBoard(playerObject, parentDivName) {
+export function renderBoard(parentDivName) {
   const parentDiv = document.querySelector(`.${parentDivName}`);
   parentDiv.innerHTML = " ";
 
@@ -16,30 +14,48 @@ export function renderBoard(playerObject, parentDivName) {
     }
   }
 }
-export function updateBoard(playerObject, parentDivName) {
+export function updateBoard(playerObject, parentDivName, hideShips) {
   const allShips = playerObject.allShips;
   // below code will display the ships based upon playerObject
-  allShips.forEach((ship) => {
-    ship.position.forEach(([x, y]) => {
-      const cell = document.getElementById(`${parentDivName}: x:${x}, y:${y}`);
-      cell.classList.add(`${ship.name}`);
+  if (hideShips === true) {
+    allShips.forEach((ship) => {
+      // below code will mark the attacked coordinates
+      if (ship.attackedCoordinates !== 0) {
+        ship.attackedCoordinates.forEach(([x, y]) => {
+          const cell = document.getElementById(
+            `${parentDivName}: x:${x}, y:${y}`
+          );
+          cell.classList.add("ship-attacked");
+          cell.dataset.attacked = "true";
+        });
+      }
     });
-    // below code will mark the attacked coordinates
-    if (ship.attackedCoordinates !== 0) {
-      ship.attackedCoordinates.forEach(([x, y]) => {
+  } else {
+    allShips.forEach((ship) => {
+      ship.position.forEach(([x, y]) => {
         const cell = document.getElementById(
           `${parentDivName}: x:${x}, y:${y}`
         );
-        cell.classList.add("ship-attacked");
+        cell.classList.add(`${ship.name}`);
       });
-    }
-  });
-
+      // below code will mark the attacked coordinates
+      if (ship.attackedCoordinates !== 0) {
+        ship.attackedCoordinates.forEach(([x, y]) => {
+          const cell = document.getElementById(
+            `${parentDivName}: x:${x}, y:${y}`
+          );
+          cell.classList.add("ship-attacked");
+          cell.dataset.attacked = "true";
+        });
+      }
+    });
+  }
   // below code will mark the missed attacks
   if (playerObject.playerBoard.missedAttacks !== 0) {
     playerObject.playerBoard.missedAttacks.forEach(([x, y]) => {
       const cell = document.getElementById(`${parentDivName}: x:${x}, y:${y}`);
       cell.classList.add("missed-attack");
+      cell.dataset.attacked = "true";
     });
   }
 }

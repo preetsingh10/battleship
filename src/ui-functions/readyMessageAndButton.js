@@ -12,8 +12,8 @@ export function readyMessageAndButton() {
   const readyButton = document.createElement("button");
   readyButton.classList.add("readyButton");
   readyButton.addEventListener("click", () => {
-    renderBoard(computerPlayer, "openant-board");
-    updateBoard(computerPlayer,'openant-board')
+    renderBoard("openant-board");
+    updateBoard(computerPlayer,'openant-board',true)
     renderDisplayBoard(gamaeStatus());
     enableAttacking()
   });

@@ -7,7 +7,7 @@ export function gamaeStatus() {
   shipsLeftHeading.textContent = "Ships left: ";
   shipsLeftHeading.classList.add("shipsLeftHeading");
   const userShipsLabel = document.createElement("div");
-  userShipsLabel.textContent = "User Ships: ";
+  userShipsLabel.textContent = "Your Ships: ";
   let userShipsLeft = document.createElement("div");
   userShipsLeft.textContent = user.shipsLeft();
   const openantLabel = document.createElement("div");
