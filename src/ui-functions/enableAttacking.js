@@ -1,25 +1,32 @@
 import { user } from "..";
 import { computerPlayer } from "..";
-import arrayEqual from "../../utility/arrayEqual";
 import { gamaeStatus } from "./gameStatus";
-import { updateBoard } from "./renderBoard";
+import { disableBoard, enableBoard, updateBoard } from "./renderBoard";
 import { renderDisplayBoard } from "./renderDisplayBoard";
 export function enableAttacking() {
   const openantBoardDiv = document.querySelector(".openant-board");
   const allOpenantCells = openantBoardDiv.querySelectorAll(".cell");
   allOpenantCells.forEach((cell) => {
+    let canAttack = true;
     cell.addEventListener(
       "click",
       () => {
+        if (canAttack === false) return;
         user.attack(computerPlayer.playerBoard, [
           +cell.dataset.x,
           +cell.dataset.y,
         ]);
         updateBoard(computerPlayer, "openant-board", true);
+        disableBoard("openant-board"); // disabling the openant board for no interuptions while openant attacks
         renderDisplayBoard(gamaeStatus());
         // the openants turn for the attack
         computerPlayer.attack(user.playerBoard, randomAttackCoordinates());
-        updateBoard(user, "user-board");
+        canAttack = false;
+        setTimeout(() => {
+          updateBoard(user, "user-board");
+          enableBoard("openant-board");
+        }, 500);
+
         renderDisplayBoard(gamaeStatus());
       },
 
@@ -38,6 +45,5 @@ function randomAttackCoordinates() {
   if (userMatchedCell.dataset.attacked === "true") {
     return randomAttackCoordinates();
   }
-  return randomCoordinates
-
+  return randomCoordinates;
 }

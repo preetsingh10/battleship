@@ -3,8 +3,7 @@ import { renderBoard } from "./ui-functions/renderBoard";
 import { renderDisplayBoard } from "./ui-functions/renderDisplayBoard";
 import { userShipsAndButtons } from "./ui-functions/userShipsAndButton";
 import { placeShip } from "./ui-functions/placeShip";
-import { readyMessageAndButton } from "./ui-functions/readyMessageAndButton";
-import { enableAttacking } from "./ui-functions/enableAttacking";
+
 const Player = require("../Player");
 
 export const user = new Player();

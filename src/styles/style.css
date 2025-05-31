@@ -20,13 +20,11 @@ body {
   text-align: center;
 }
 .game-body {
-  border: 1px solid green;
   margin: 2%;
   display: grid;
   grid-template-rows: 0.2fr 0.8fr;
 }
 .board-titles {
-  border: 1px solid red;
   display: flex;
   justify-content: space-between;
   margin-left: 5%;
@@ -38,7 +36,6 @@ body {
 }
 .user-board,
 .openant-board {
-  border: 1px solid;
   margin: 1%;
   height: fit-content;
   width: fit-content;
@@ -49,7 +46,7 @@ body {
 .multi-purpose-board {
   min-width: 250px;
   max-width: 400px;
-  border: 1px solid blue;
+
   margin: 1%;
 }
 
@@ -72,20 +69,14 @@ body {
 .cell:hover {
   background-color: #334155;
 }
-.Carrier {
-  background-color: green;
-}
-.BattleShip {
-  background-color: rgb(220, 20, 143);
-}
-.Submarine {
-  background-color: black;
-}
+
+.Carrier,
+.Cruiser,
+.BattleShip,
+.Submarine,
 .Destroyer {
-  background-color: purple;
-}
-.Cruiser {
-  background-color: brown;
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0);
 }
 
 .ship-container {
@@ -126,7 +117,8 @@ body {
 }
 .headingTextForShipButtons,
 .readyHeading,
-.shipsLeftHeading,.winner-message {
+.shipsLeftHeading,
+.winner-message {
   grid-column: span 2;
   background-color: #0f172a; /* Deep navy */
   color: #38bdf8; /* Bright blue for command tone */
@@ -163,9 +155,27 @@ body {
   grid-column: span 2;
 }
 /* attacks display */
-.ship-attacked{
+.ship-attacked {
   background-color: red;
 }
-.missed-attack{
-  background-color: #22c55e;
+.missed-attack {
+  background-color: #226bc5;
+}
+.no-clicks {
+  pointer-events: none;
+}
+.disableBoard {
+  position: relative;
+  pointer-events: none;
+  z-index: 10;
+}
+.disableBoard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  z-index: 2;
 }

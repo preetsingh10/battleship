@@ -28,11 +28,13 @@ export function gamaeStatus() {
     outerDiv.innerHTML = " ";
     winnerMessage.textContent = "💀 You Loose Commander 💀";
     outerDiv.append(winnerMessage);
+    document.querySelector(".openant-board").classList.add("no-clicks");
   }
   if (computerPlayer.allShipSunk()) {
     outerDiv.innerHTML = " ";
     winnerMessage.textContent = "🎉 You Win Commander 🎉";
     outerDiv.append(winnerMessage);
+    document.querySelector(".openant-board").classList.add("no-clicks");
   }
   return outerDiv;
 }

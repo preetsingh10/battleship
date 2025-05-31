@@ -59,3 +59,21 @@ export function updateBoard(playerObject, parentDivName, hideShips) {
     });
   }
 }
+export function disableBoard(boardDivName) {
+  if (typeof boardDivName !== "string") {
+    throw new Error(
+      "This function expects an div name of the board in a string."
+    );
+  }
+  const boardDivElement = document.querySelector(`.${boardDivName}`);
+  boardDivElement.classList.add("disableBoard");
+}
+export function enableBoard(boardDivName) {
+  if (typeof boardDivName !== "string") {
+    throw new Error(
+      "This function expects an div name of the board in a string."
+    );
+  }
+  const boardDivElement = document.querySelector(`.${boardDivName}`);
+  boardDivElement.classList.remove("disableBoard");
+}
