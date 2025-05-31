@@ -15,12 +15,19 @@ class Player {
       }
     });
   }
-  shipsLeft(){
-    return this.allShips.filter(ship=>{
-      if(ship.hitPoints !== 0){
-        return true
+  returnShipObject(shipName) {
+    return this.allShips.find((ship) => {
+      if (ship.name === shipName) {
+        return true;
       }
-    }).length
+    });
+  }
+  shipsLeft() {
+    return this.allShips.filter((ship) => {
+      if (ship.hitPoints !== 0) {
+        return true;
+      }
+    }).length;
   }
 
   attack(enemyBoard, [x, y]) {
@@ -30,7 +37,7 @@ class Player {
     return this.playerBoard.receiveAttack(x, y);
   }
   allShipsPlaced() {
-    return this.allShips.every(ship=> ship.placed == true);
+    return this.allShips.every((ship) => ship.placed == true);
   }
   allShipSunk() {
     return this.playerBoard.allShipsSunk();

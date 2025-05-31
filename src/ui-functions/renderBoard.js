@@ -77,3 +77,23 @@ export function enableBoard(boardDivName) {
   const boardDivElement = document.querySelector(`.${boardDivName}`);
   boardDivElement.classList.remove("disableBoard");
 }
+export function hoverUpdates(shipCoordinates, outerDivName) {
+  shipCoordinates.forEach(([x, y]) => {
+    document
+      .getElementById(`${outerDivName}: x:${x}, y:${y}`)
+      .classList.add("hoverUpdate");
+  });
+}
+export function notValidPlacementUpdates(shipCoordinates, outerDivName) {
+  if (shipCoordinates) {
+    shipCoordinates.forEach(([x, y]) => {
+      let matchingNode = document.getElementById(
+        `${outerDivName}: x:${x}, y:${y}`
+      );
+
+      if (matchingNode) {
+        matchingNode.classList.add("notValidPlacement");
+      }
+    });
+  }
+}

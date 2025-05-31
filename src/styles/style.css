@@ -50,13 +50,6 @@ body {
   margin: 1%;
 }
 
-/* .cell {
-  height: 50px;
-  width: 50px;
-  background-color: aqua;
-  border: 1px solid rgb(0, 0, 0);
-  cursor: pointer;
-} */
 .cell {
   width: 50px;
   height: 50px;
@@ -66,9 +59,7 @@ body {
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
-.cell:hover {
-  background-color: #334155;
-}
+
 
 .Carrier,
 .Cruiser,
@@ -178,4 +169,13 @@ body {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
   z-index: 2;
+}
+.hoverUpdate{
+background-color: rgba(172, 255, 47, 0.443);
+  border: 1px solid green;
+}
+
+.notValidPlacement{
+  background-color: rgba(255, 0, 0, 0.225);
+  border: 1px solid red;
 }
