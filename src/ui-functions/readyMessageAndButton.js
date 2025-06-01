@@ -13,6 +13,7 @@ export function readyMessageAndButton() {
   readyButton.classList.add("readyButton");
   readyButton.addEventListener("click", () => {
     renderBoard("openant-board");
+    document.querySelector('.enemy-title').style.display = 'block'
     updateBoard(computerPlayer,'openant-board',true)
     renderDisplayBoard(gamaeStatus());
     enableAttacking()

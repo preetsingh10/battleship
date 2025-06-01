@@ -8,7 +8,7 @@ const Player = require("../Player");
 
 export const user = new Player();
 export const computerPlayer = new Player();
-let gameStart = false;
+
 computerPlayer.genrateRandomShipPostion();
 
 // belown functions will render the gameplay
@@ -17,5 +17,3 @@ renderDisplayBoard(userShipsAndButtons(user));
 
 // now its the ship placing stage where user will place the ships on the board
 placeShip(user);
-
-// startGame();

@@ -2,27 +2,33 @@ import {
   updateBoard,
   hoverUpdates,
   notValidPlacementUpdates,
+  disableBoard,
 } from "./renderBoard";
 import { readyMessageAndButton } from "./readyMessageAndButton";
 import { renderDisplayBoard } from "./renderDisplayBoard";
+
 export function placeShip(userObject) {
   const userBoard = document.querySelector(".user-board");
   const userCells = userBoard.querySelectorAll(".cell");
   const userShipButtons = document.querySelectorAll(".ship-button");
   let selectedShip;
+  let direction = "horizontal";
+  let shipCoordinates;
   userShipButtons.forEach((button) => {
     button.addEventListener("click", () => {
       selectedShip = button.textContent;
     });
   });
-  function cellClickEvent(e) {
-    if (!selectedShip) {
-      return console.error("no ship is selected");
+  userBoard.addEventListener("click", (e) => {
+    if (e.target.classList.contains("cell")) {
+      cellClickEvent(e);
     }
-    const coordinates = [+e.target.dataset.x, +e.target.dataset.y];
-
+  });
+  function cellClickEvent(e) {
     try {
-      userObject.placeShip(selectedShip, "horizontal", coordinates);
+      const coordinates = [+e.target.dataset.x, +e.target.dataset.y];
+
+      userObject.placeShip(selectedShip, direction, coordinates);
       document.getElementById(selectedShip).classList.add("ship_placed_button");
       selectedShip = null;
     } catch (error) {
@@ -31,19 +37,31 @@ export function placeShip(userObject) {
     updateBoard(userObject, "user-board");
 
     selectedShip = null;
+    // when all ships are placed
     if (userObject.allShipsPlaced()) {
       renderDisplayBoard(readyMessageAndButton());
+      userCells.forEach((cell) => {
+        cell.classList.remove("hoverUpdate");
+      });
+
+      updateBoard(userObject, "user-board");
+      disableBoard("user-board");
     }
   }
 
-  userBoard.addEventListener("click", (e) => {
-    if (e.target.classList.contains("cell")) {
-      cellClickEvent(e);
+  window.addEventListener("keydown", spaceBarFunction);
+  function spaceBarFunction(e) {
+    if (e.code === "Space") {
+      e.preventDefault();
+      if (direction === "horizontal") {
+        direction = "vertical";
+      } else if (direction === "vertical") {
+        direction = "horizontal";
+      }
     }
-  });
+  }
 
   userCells.forEach((cell) => {
-    let shipCoordinates;
     function mouseenterFunction(e) {
       try {
         userCells.forEach((userCell) => {
@@ -55,18 +73,25 @@ export function placeShip(userObject) {
         shipCoordinates = shipObject.generateCordinates(
           coordinates,
           shipObject.length,
-          "horizontal"
+          direction
         );
         hoverUpdates(shipCoordinates, "user-board");
+        cell.addEventListener("mouseleave", () => {
+          cell.classList.remove("notValidPlacement");
+          cell.classList.remove("hoverUpdate");
+        });
       } catch (error) {
         console.log(error.message);
         notValidPlacementUpdates(shipCoordinates, "user-board");
       }
     }
-    function mouseLeaveFunction(e) {
-      cell.classList.remove("notValidPlacement");
-    }
+
     cell.addEventListener("mouseenter", mouseenterFunction);
     cell.addEventListener("mouseleave", mouseLeaveFunction);
   });
+  function mouseLeaveFunction(e) {
+    userCells.forEach((cell) => {
+      cell.classList.remove("notValidPlacement");
+    });
+  }
 }

@@ -6,7 +6,11 @@ export function userShipsAndButtons(userPlayerObject) {
   const headingText = document.createElement("div");
   headingText.textContent = "Place your ships commander";
   headingText.classList.add("headingTextForShipButtons");
+  const spaceBarInstructions = document.createElement('div')
+  spaceBarInstructions.textContent = "Press Space Bar to change the direction of the ships"
+  spaceBarInstructions.classList.add('spacebarInstruction')
   outputDiv.appendChild(headingText);
+  outputDiv.append(spaceBarInstructions)
   userPlayerObject.allShips.forEach((ship) => {
     const shipContainer = document.createElement("div");
     shipContainer.classList.add("ship-container");
