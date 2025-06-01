@@ -20,6 +20,9 @@ export function placeShip(userObject) {
     });
   });
   userBoard.addEventListener("click", (e) => {
+    if(selectedShip === undefined){
+      return
+    }
     if (e.target.classList.contains("cell")) {
       cellClickEvent(e);
     }
@@ -36,7 +39,7 @@ export function placeShip(userObject) {
     }
     updateBoard(userObject, "user-board");
 
-    selectedShip = null;
+    selectedShip = undefined;
     // when all ships are placed
     if (userObject.allShipsPlaced()) {
       renderDisplayBoard(readyMessageAndButton());
